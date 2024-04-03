@@ -9,7 +9,6 @@ const withCustomProductName = (config, customName) => {
       const xcodeProject = config.modResults;
       xcodeProject.productName = customName;
       console.log(xcodeProject.productName)
-
       return config;
     }
   );
