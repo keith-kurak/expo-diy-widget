@@ -1,5 +1,8 @@
 
-module.exports = ({ config }) => {
+import 'ts-node/register'; // Add this to import TypeScript files
+import { ExpoConfig } from 'expo/config';
+
+module.exports = ({ config } : { config: ExpoConfig }) => {
   return {
     name: "expo-diy-widget",
     slug: "expo-diy-widget",
@@ -29,7 +32,7 @@ module.exports = ({ config }) => {
       output: "static",
       favicon: "./assets/images/favicon.png",
     },
-    plugins: ["expo-router", ["./plugins/withWidget.js", "custom"]],
+    plugins: ["expo-router", ["./plugins/withWidget.ts", { customName: "custom" } ]],
     experiments: {
       typedRoutes: true,
     },
