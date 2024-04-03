@@ -2,10 +2,6 @@
 import 'ts-node/register'; // Add this to import TypeScript files
 import { ExpoConfig } from 'expo/config';
 
-const test = require("./test");
-
-test();
-
 module.exports = ({ config } : { config: ExpoConfig }) => {
   return {
     name: "expo-diy-widget",
