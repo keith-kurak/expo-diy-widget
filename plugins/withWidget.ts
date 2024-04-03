@@ -1,13 +1,14 @@
 import { ConfigPlugin, withXcodeProject, IOSConfig } from 'expo/config-plugins';
 
 
-const withCustomProductName : ConfigPlugin<{customName: string}> = (config, props) => {
+const withCustomProductName : ConfigPlugin<string> = (config, customName) => {
   return withXcodeProject(
     config,
     async (
-      config
+      /* @info <b>{ modResults, modRequest }</b> */ config
+      /* @end */
     ) => {
-      config.modResults = IOSConfig.Name.setProductName({ name: props.customName }, config.modResults);
+      //config.modResults = IOSConfig.Name.setProductName({ name: customName }, config.modResults);
       return config;
     }
   );
