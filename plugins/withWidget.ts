@@ -33,6 +33,7 @@ const withWidget: ConfigPlugin = (config) => {
       const widgetFolderName = "Hello Widget";
       const widgetBundleId = config.ios!.bundleIdentifier! + "." + "Hello_Widget";
       const widgetExtensionFrameworks = ["WidgetKit", "SwiftUI"];
+      const developmentTeamId = undefined;
 
       // absolute directories we need when reading files from disk
       const projectRoot = config.modRequest.projectRoot;
@@ -204,6 +205,10 @@ const withWidget: ConfigPlugin = (config) => {
         runOnlyForDeploymentPostprocessing: 0,
       });
 
+      // optionally add the team (needed for testing on device)
+      const myDevelopmentTeamId = developmentTeamId ?? mainAppTarget!.getDefaultBuildSetting("DEVELOPMENT_TEAM");
+      applyDevelopmentTeamIdToTargets(project, myDevelopmentTeamId);
+
       // save
 
       const contents = xcodeParse.build(project.toJSON());
@@ -363,6 +368,27 @@ function createConfigurationList(
   });
 
   return configurationList;
+}
+
+function applyDevelopmentTeamIdToTargets(project: XcodeProject, developmentTeamId: string | undefined) {
+  project.rootObject.props.targets.forEach((target) => {
+    if (developmentTeamId) {
+      target.setBuildSetting("DEVELOPMENT_TEAM", developmentTeamId);
+    } else {
+      target.removeBuildSetting("DEVELOPMENT_TEAM");
+    }
+  });
+
+  for (const target of project.rootObject.props.targets) {
+    project.rootObject.props.attributes.TargetAttributes ??= {};
+
+    // idk, attempting to prevent EAS Build from failing when it codesigns
+    project.rootObject.props.attributes.TargetAttributes[target.uuid] ??= {
+      CreatedOnToolsVersion: "14.3",
+      ProvisioningStyle: "Automatic",
+      DevelopmentTeam: developmentTeamId,
+    };
+  }
 }
 
 export default withWidget;
