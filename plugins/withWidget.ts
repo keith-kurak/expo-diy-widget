@@ -1,6 +1,5 @@
 import {
   ConfigPlugin,
-  withXcodeProject,
   IOSConfig,
   withDangerousMod,
 } from "expo/config-plugins";
@@ -364,12 +363,6 @@ function createConfigurationList(
   });
 
   return configurationList;
-}
-
-function kebabToCamelCase(str: string) {
-  return str.replace(/-([a-z])/g, function (g) {
-    return g[1].toUpperCase();
-  });
 }
 
 export default withWidget;
