@@ -32,7 +32,7 @@ const withWidget: ConfigPlugin = (config) => {
 
       // constants
       const widgetFolderName = "Hello Widget";
-      const widgetBundleId = config.ios!.bundleIdentifier! + "." + kebabToCamelCase(widgetFolderName);
+      const widgetBundleId = config.ios!.bundleIdentifier! + "." + "Hello_Widget";
       const widgetExtensionFrameworks = ["WidgetKit", "SwiftUI"];
 
       // absolute directories we need when reading files from disk
