@@ -206,6 +206,7 @@ const withWidget: ConfigPlugin = (config) => {
       });
 
       // optionally add the team (needed for testing on device)
+      // how to get team ID: https://help.graphy.com/hc/en-us/articles/6913285345053-iOS-How-to-find-Team-ID-for-Apple-Developer-Account
       const myDevelopmentTeamId = developmentTeamId ?? mainAppTarget!.getDefaultBuildSetting("DEVELOPMENT_TEAM");
       applyDevelopmentTeamIdToTargets(project, myDevelopmentTeamId);
 
