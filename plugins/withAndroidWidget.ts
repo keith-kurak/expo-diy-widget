@@ -33,6 +33,8 @@ function setAndroidManifestReceiver(
   config: ExpoConfig,
   mainApplication: AndroidConfig.Manifest.ManifestApplication
 ) {
+  mainApplication.receiver = mainApplication.receiver ?? [];
+
   mainApplication.receiver?.push({
     $: {
       "android:name": `.HelloAppWidget`,
@@ -76,14 +78,14 @@ function withWidgetFiles(
         'app/src/main/java/' +
           config.android?.package?.split('.').join('/')
       );
-      fs.copyFileSync(path.join(widgetFilesRoot, 'HelloAppWidget.java'), path.join(appPackageFolder, 'HelloAppWidget.java'));
+      fs.copyFileSync(path.join(widgetFilesRoot, 'HelloAppWidget.kt'), path.join(appPackageFolder, 'HelloAppWidget.kt'));
 
       const resFolder = path.join(dangerousConfig.modRequest.platformProjectRoot, 'app/src/main/res');
 
       fs.mkdirSync(path.join(resFolder, 'xml'), { recursive: true });
       fs.copyFileSync(path.join(widgetFilesRoot, 'hello_app_widget_info.xml'), path.join(resFolder, 'xml', 'hello_app_widget_info.xml'));
 
-      fs.mkdirSync(path.join(resFolder, 'xml'), { recursive: true });
+      fs.mkdirSync(path.join(resFolder, 'layout'), { recursive: true });
       fs.copyFileSync(path.join(widgetFilesRoot, 'hello_app_widget.xml'), path.join(resFolder, 'layout', 'hello_app_widget.xml'));
 
       return dangerousConfig;
