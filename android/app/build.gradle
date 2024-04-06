@@ -119,9 +119,6 @@ android {
             useLegacyPackaging (findProperty('expo.useLegacyPackaging')?.toBoolean() ?: false)
         }
     }
-    /*buildFeatures {
-        viewBinding true
-    }*/
 }
 
 // Apply static values from `gradle.properties` to the `android.packagingOptions`

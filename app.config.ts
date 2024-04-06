@@ -1,8 +1,7 @@
+import "ts-node/register"; // Add this to import TypeScript files
+import { ExpoConfig } from "expo/config";
 
-import 'ts-node/register'; // Add this to import TypeScript files
-import { ExpoConfig } from 'expo/config';
-
-module.exports = ({ config } : { config: ExpoConfig }) => {
+module.exports = ({ config }: { config: ExpoConfig }) => {
   return {
     name: "expo-diy-widget",
     slug: "expo-diy-widget",
@@ -26,15 +25,18 @@ module.exports = ({ config } : { config: ExpoConfig }) => {
         foregroundImage: "./assets/images/adaptive-icon.png",
         backgroundColor: "#ffffff",
       },
+      package: "com.keithkurak.expodiywidget",
     },
     web: {
       bundler: "metro",
       output: "static",
       favicon: "./assets/images/favicon.png",
     },
-    plugins: ["expo-router", ["./plugins/withAndroidWidget.ts"]],
+    plugins: ["expo-router"],
     experiments: {
       typedRoutes: true,
     },
   };
 };
+
+// , ["./plugins/withAndroidWidget.ts"]
