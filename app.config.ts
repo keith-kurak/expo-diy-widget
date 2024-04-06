@@ -32,11 +32,10 @@ module.exports = ({ config }: { config: ExpoConfig }) => {
       output: "static",
       favicon: "./assets/images/favicon.png",
     },
-    plugins: ["expo-router"],
+    plugins: ["expo-router", ["./plugins/withAndroidWidget.ts"]],
     experiments: {
       typedRoutes: true,
     },
   };
 };
 
-// , ["./plugins/withAndroidWidget.ts"]
